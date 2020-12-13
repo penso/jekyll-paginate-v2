@@ -162,6 +162,7 @@ module Jekyll
           puts f + "  Category: ".ljust(r) + (config['category'].nil? || config['category'] == "posts" ? "[Not set]" : config['category'].to_s)
           puts f + "  Tag: ".ljust(r) + (config['tag'].nil? ? "[Not set]" : config['tag'].to_s)
           puts f + "  Locale: ".ljust(r) + (config['locale'].nil? ? "[Not set]" : config['locale'].to_s)
+          puts f + "  OldArchive: ".ljust(r) + (config['oldarchive'].nil? ? "[Not set]" : config['oldarchive'].to_s)
 
           if config['legacy'] 
             puts f + " Legacy Paginate Code Enabled"
@@ -212,12 +213,16 @@ module Jekyll
         before = using_posts.size.to_i
         using_posts = PaginationIndexer.read_config_value_and_filter_posts(config, 'category', using_posts, all_categories)
         self._debug_print_filtering_info('Category', before, using_posts.size.to_i)
+
         before = using_posts.size.to_i
         using_posts = PaginationIndexer.read_config_value_and_filter_posts(config, 'tag', using_posts, all_tags)
         self._debug_print_filtering_info('Tag', before, using_posts.size.to_i)
+
         before = using_posts.size.to_i
         using_posts = PaginationIndexer.read_config_value_and_filter_posts(config, 'locale', using_posts, all_locales)
         self._debug_print_filtering_info('Locale', before, using_posts.size.to_i)
+
+        before = using_posts.size.to_i
         using_posts = PaginationIndexer.read_config_value_and_filter_posts(config, 'oldarchive', using_posts, all_locales)
         self._debug_print_filtering_info('Old Archive', before, using_posts.size.to_i)
         
