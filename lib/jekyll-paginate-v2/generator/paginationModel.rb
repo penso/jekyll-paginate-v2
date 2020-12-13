@@ -218,6 +218,8 @@ module Jekyll
         before = using_posts.size.to_i
         using_posts = PaginationIndexer.read_config_value_and_filter_posts(config, 'locale', using_posts, all_locales)
         self._debug_print_filtering_info('Locale', before, using_posts.size.to_i)
+        using_posts = PaginationIndexer.read_config_value_and_filter_posts(config, 'oldarchive', using_posts, all_locales)
+        self._debug_print_filtering_info('Old Archive', before, using_posts.size.to_i)
         
         # Apply sorting to the posts if configured, any field for the post is available for sorting
         if config['sort_field']
